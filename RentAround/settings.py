@@ -18,6 +18,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -42,7 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'whitenoise.runserver_nostatic',
+    'django.contrib.gis',
+    'leaflet'
 ]
+SERIALIZATION_MODULES = {
+    "geojson": "django.contrib.gis.serializers.geojson", 
+ }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,13 +87,15 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'RentAround',
         'USER': 'postgres',
         'PASSWORD': 'marvin',
         'HOST': '127.0.0.1',
         'PORT': '5432',   
-        'DATABASE_URL=postgres':'//username:password@localhost:5432/marketing'
+        #'DATABASE_URL=postgres':'//postgres:marvin@localhost:5432/RentAround'
+        
+
 
     }
     # 'default': {
